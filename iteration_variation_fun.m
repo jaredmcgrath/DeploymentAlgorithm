@@ -17,9 +17,9 @@ function [total_orders, order_queue] = iteration_variation_fun(total_orders,orde
 % NOTE 1: Another idea for using variable density is to change the density
 % if, when the agents pass over some area, they lower the density (this
 % highly depends on your application). To do this, you would have to use
-% the current positions of the agents, stored in Agent_Positions, 
+% the current positions of the agents, stored in Agent_Positions,
 % which is an n x 2 matrix with the indices of the agents as rows,
-% x-position for the first column, and y-position for the second column. 
+% x-position for the first column, and y-position for the second column.
 % NOTE 2: Density is being constantly updated every iteration, therefore
 % the value of Density at iteration k is Density(x,y,k), in this function
 % you would want to generate Density(x,y,k+1).
