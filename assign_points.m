@@ -23,8 +23,8 @@ assigned_points = zeros(sides,sides);
 threshold = 0;
 for i = 1 : size(agentPositions,1) % iterate over each agent
     cellPoints = [-1 -1];
-    x_0 = agentPositions(i,1); % find position of that agent
-    y_0 = agentPositions(i,2);
+    x_0 = round(agentPositions(i,1)); % find position of that agent
+    y_0 = round(agentPositions(i,2));
     cumulative_mass = 0;
     k = 1;
     % Should determine a more optimal discrete radius than sides
@@ -32,7 +32,7 @@ for i = 1 : size(agentPositions,1) % iterate over each agent
 
     % This loop adds space to an agent's region while the region has a
     % mass less than the target mass +/- a threshold
-    while (cumulative_mass - threshold) < target_region_mass
+    while ((cumulative_mass - threshold) < target_region_mass) && (k < size(points,1))
         % Helper vars cuz typing is hard
         x = points(k,1);
         y = points(k,2);
@@ -61,7 +61,7 @@ for y = 1:sides
         % Find unassigned points
         % Should test this
         if assigned_points(y,x) == 0
-            disp(['Unassigned point (' sprintf('%d',x) ',' sprintf('%d',y) ')'])
+            %disp(['Unassigned point (' sprintf('%d',x) ',' sprintf('%d',y) ')'])
             minDist = [0 Inf];
             for agentNum = 1:n
                 dist = distance_between(x, y, agentPositions(agentNum,1), agentPositions(agentNum,2));
@@ -72,7 +72,7 @@ for y = 1:sides
             % Add the point to the closest agent's region
             agentPoints{1,minDist(1)} = addToArray(agentPoints{1,minDist(1)}, x, y);
         elseif assigned_points(y,x) > 1
-            disp(['Over assigned point (' sprintf('%d',x) ',' sprintf('%d',y) ')'])
+            %disp(['Over assigned point (' sprintf('%d',x) ',' sprintf('%d',y) ')'])
             over_assigned = addToArray(over_assigned, x, y);
         end
     end

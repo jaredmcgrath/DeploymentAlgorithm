@@ -1,4 +1,4 @@
-function Density = iteration_variation_fun(Density,iteration_number,...
+function [total_orders, order_queue] = iteration_variation_fun(total_orders,order_queue,iteration_number,...
     delay,order_frequency)
 % This function will run through your Density matrix every
 % iteration. Since the Density matrix is discretized depending on the
@@ -26,7 +26,7 @@ function Density = iteration_variation_fun(Density,iteration_number,...
 
 change = mod(iteration_number,delay); %Checks if iteration_number divides delay.
 if change == 0
-    sz = size(Density,1);
+    sz = size(total_orders,1);
     % Ensure at most, 1 order is added to every (x,y)
     if order_frequency > sz^2
         order_frequency = sz^2;
@@ -51,7 +51,8 @@ if change == 0
 % %             end
 %             %% External Density change due 1 random order being placed
              if ismember([i j],random_positions,'rows')
-                 Density(i,j) = Density(i,j) + 1;
+                 total_orders(i,j) = total_orders(i,j) + 1;
+                 order_queue(i,j) = order_queue(i,j) + 1;
                  % Need to update order queue here
              end
          end

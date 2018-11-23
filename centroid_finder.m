@@ -13,10 +13,8 @@ for i = 1:Number_of_Robots
     for j = 1:size(Agent_Points{1,i},1)
         x = Agent_Points{1,i}(j,1);
         y = Agent_Points{1,i}(j,2);
-        if x_density > 0 && y_density > 0
-            Centroid_sum(i,1) = Centroid_sum(i,1) + x*Density(x,y);
-            Centroid_sum(i,2) = Centroid_sum(i,2) + y*Density(x,y);
-        end
+        Centroid_sum(i,1) = Centroid_sum(i,1) + x*Density(x,y);
+        Centroid_sum(i,2) = Centroid_sum(i,2) + y*Density(x,y);
     end
 end
 
