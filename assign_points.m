@@ -7,8 +7,8 @@ function [ agentPoints ] = assign_points( agentPositions, sides, target_region_m
 % cellpoints is divided between the agents in the corresponding coms group.
 
 n = size(agentPositions,1);
-% agentPoints is a 1-row, n-column cell array where the nth cell contains
-% a list of points in the nth agent's region
+% agentPoints is a 1-row, n-column cell array where the ith cell contains
+% a list of points in the ith agent's region
 agentPoints = cell(1,n);
 
 % Matrix that is 0 if hasn't been assigned to, 1 if it has

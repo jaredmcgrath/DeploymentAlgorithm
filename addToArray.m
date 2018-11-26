@@ -1,4 +1,4 @@
-function [ Points ] = addToArray( Points, x, y )
+ function [ Points ] = addToArray( Points, x, y )
 % Adds (x,y) to the array Points. If (x,y) is already in Points, then 
 % nothing happens. Points remains sorted first by x, then by y throughout
 last = size(Points, 1);
