@@ -1,0 +1,8 @@
+# Weird file we don't need
+.DS_Store
+
+# All excel files can be ignored as they autogenerate on first run
+*.csv
+
+# Agent data MATLAB array can also be ignored for the same reasons
+agentData.mat
