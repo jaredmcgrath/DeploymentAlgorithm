@@ -6,3 +6,6 @@
 
 # Agent data MATLAB array can also be ignored for the same reasons
 agentData.mat
+
+# Don't include autosave files
+*.asv

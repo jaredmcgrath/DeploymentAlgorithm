@@ -1,4 +1,4 @@
- function [agent_orders, order_queue] = sort_orders(agent_points, agent_positions, order_queue)
+ function [agent_orders, order_queue, selected_orders] = sort_orders(agent_points, agent_positions, order_queue, selected_orders)
 % Function does 2 things:
 % 1) If an agent is at the location of an order, consider the order
 % complete. We then remove that order from the queue
@@ -16,7 +16,13 @@ agent_orders = cell(1,n);
 % To retrieve an order, just set the order queue at each agent's location
 % to 0
 for i = 1:n
-    order_queue(agent_positions(i,2), agent_positions(i,1)) = 0;
+    order_queue(round(agent_positions(i,2)), round(agent_positions(i,1))) = 0;
+    % If the agent retrieved its selected order, clear it from the list
+    if ~isempty(selected_orders{1,i})
+        if (selected_orders{1,i} == [round(agent_positions(i,1)) round(agent_positions(i,2))])
+            selected_orders{1,i} = [];
+        end
+    end
 end
 % Figure out which agents retrieve which orders
 for agent_num = 1:n
