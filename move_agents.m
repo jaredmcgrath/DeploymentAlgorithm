@@ -30,15 +30,11 @@ for i = 1 : n
         % being pursued, move towards the centorid
         if isempty(agent_orders{1,i}) && isempty(selected_orders{1,i})
             direction = [centroids(i,1) - agentPositions(i,1), centroids(i,2) - agentPositions(i,2)];
-            % Check to make sure agents don't overshoot:
-            if sqrt(direction(1)^2 + direction(2)^2) < max_velocity
-                delta_x = direction(1);
-                delta_y = direction(2);
-            else
-                [delta_x, delta_y] = velocity_fun(direction, max_velocity);
-            end
+            % velocity_fun will use manhattan distances to ensure at least
+            % x or y will fall on an whole number
+            [delta_x, delta_y] = velocity_fun(direction, max_velocity, agentPositions(i,:));
             % Update total distance
-            total_distance = total_distance + sqrt(delta_x^2 + delta_y^2);
+            total_distance = total_distance + abs(delta_x) + abs(delta_y);
             % Update agent positions
             agentPositions(i,1) = agentPositions(i,1) + delta_x;
             agentPositions(i,2) = agentPositions(i,2) + delta_y;
@@ -46,15 +42,11 @@ for i = 1 : n
         elseif ~isempty(selected_orders{1,i})
             % Move agent towards order
             direction = [selected_orders{1,i}(1,1) - agentPositions(i,1), selected_orders{1,i}(1,2) - agentPositions(i,2)];
-            % Check to make sure agents don't overshoot:
-            if sqrt(direction(1)^2 + direction(2)^2) < max_velocity
-                delta_x = direction(1);
-                delta_y = direction(2);
-            else
-                [delta_x, delta_y] = velocity_fun(direction, max_velocity);
-            end
+            % velocity_fun will use manhattan distances to ensure at least
+            % x or y will fall on an whole number
+            [delta_x, delta_y] = velocity_fun(direction, max_velocity, agentPositions(i,:));
             % Update total distance
-            total_distance = total_distance + sqrt(delta_x^2 + delta_y^2);
+            total_distance = total_distance + abs(delta_x) + abs(delta_y);
             % Update agent positions
             agentPositions(i,1) = agentPositions(i,1) + delta_x;
             agentPositions(i,2) = agentPositions(i,2) + delta_y;
