@@ -1,5 +1,5 @@
-function [total_orders, order_queue] = iteration_variation_fun(total_orders,order_queue,iteration_number,...
-    delay,order_frequency)
+function [total_orders, order_queue,density] = iteration_variation_fun(total_orders,order_queue,iteration_number,...
+    delay,order_frequency,density)
 % This function will run through your Density matrix every
 % iteration. Since the Density matrix is discretized depending on the
 % Partition Number chosen, the (x,y) values of the (i,j) entry of the
@@ -27,6 +27,8 @@ function [total_orders, order_queue] = iteration_variation_fun(total_orders,orde
 change = mod(iteration_number,delay); %Checks if iteration_number divides delay.
 if change == 0
     sz = size(total_orders,1);
+    % Subtract one from every density point
+    density = density - (order_frequency*ones(sz)/delay);
     % Ensure at most, 1 order is added to every (x,y)
     if order_frequency > sz^2
         order_frequency = sz^2;
@@ -53,7 +55,11 @@ if change == 0
              if ismember([i j],random_positions,'rows')
                  total_orders(i,j) = total_orders(i,j) + 1;
                  order_queue(i,j) = order_queue(i,j) + 1;
+                 density(i,j) = density(i,j) + 10;
                  % Need to update order queue here
+             % Never want the density of a point less than 1
+             elseif density(i,j) < 1
+                 density(i,j) = 1;
              end
          end
      end
