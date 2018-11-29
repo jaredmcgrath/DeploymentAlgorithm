@@ -27,8 +27,8 @@ for i = 1 : size(agentPositions,1) % iterate over each agent
     y_0 = round(agentPositions(i,2));
     cumulative_mass = 0;
     k = 1;
-    % Should determine a more optimal discrete radius than sides
-    points = radial_points(x_0, y_0, sides, sides);
+    % To optimize, use radius equal to ceil(sqrt(2)*sides/n)
+    points = radial_points(x_0, y_0, ceil(sqrt(2)*sides/n), sides);
 
     % This loop adds space to an agent's region while the region has a
     % mass less than the target mass +/- a threshold
