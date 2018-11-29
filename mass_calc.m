@@ -21,8 +21,3 @@ for i = 1:Number_of_Robots
 end
 
 end
-
-            
-            
-        
-        
